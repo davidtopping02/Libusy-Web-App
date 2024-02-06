@@ -12,10 +12,10 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Docker Image
-      run: docker build -t my-angular-app .
+      run: docker build -t uod-lib-occupancy-app .
 
     - name: Run Container
-      run: docker run -d -p 80:80 my-angular-app
+      run: docker run -d -p 80:80 uod-lib-occupancy-app
 
     - name: Check if accessible on localhost
       run: |
