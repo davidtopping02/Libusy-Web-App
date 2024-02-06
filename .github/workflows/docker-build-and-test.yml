@@ -16,9 +16,12 @@ jobs:
       run: docker build -t uod-lib-occupancy-app .
 
     - name: Run Container
-      run: docker run -d -p 80:80 uod-lib-occupancy-app
+      run: docker run -d -p 8080:8080 uod-lib-occupancy-app
 
+    - name: Check Container Status
+      run: docker ps
+    
     - name: Check if accessible on localhost
       run: |
         sleep 10 # Wait for the server to start
-        curl http://localhost || exit 1
+        curl http://localhost:8080 || exit 1
