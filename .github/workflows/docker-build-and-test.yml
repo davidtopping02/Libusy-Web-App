@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Docker Image
-      run: docker build -t uod-lib-occupancy-app -f uod-library-occupancy-angular-app/Dockerfile uod-library-occupancy-angular-app/
+      run: docker build -t uod-lib-occupancy-app .
 
     - name: Run Container
       run: docker run -d -p 80:80 uod-lib-occupancy-app
