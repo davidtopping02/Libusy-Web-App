@@ -1,6 +1,8 @@
 # Use an official Node.js runtime as the base image
 FROM node:18 as build
 
+ENV HOST 0.0.0.0
+
 # Set the working directory in the container
 WORKDIR /app
 
