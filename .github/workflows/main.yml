@@ -1,0 +1,23 @@
+name: Docker Build and Test
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker Image
+      run: docker build -t my-angular-app .
+
+    - name: Run Container
+      run: docker run -d -p 80:80 my-angular-app
+
+    - name: Check if accessible on localhost
+      run: |
+        sleep 10 # Wait for the server to start
+        curl http://localhost || exit 1
