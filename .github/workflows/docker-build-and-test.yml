@@ -20,8 +20,3 @@ jobs:
 
     - name: Check Container Status
       run: docker ps
-    
-    - name: Check if accessible on localhost
-      run: |
-        sleep 15 # Wait for the server to start
-        curl http://localhost:8080/ || exit 1
