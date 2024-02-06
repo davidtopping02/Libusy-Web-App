@@ -23,5 +23,5 @@ jobs:
     
     - name: Check if accessible on localhost
       run: |
-        sleep 10 # Wait for the server to start
-        curl http://localhost:8080 || exit 1
+        sleep 15 # Wait for the server to start
+        curl http://localhost || exit 1
