@@ -1,0 +1,31 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/hallowed-air-406414/github.com/davidtopping02/uod-occupancy-tracker:$COMMIT_SHA'
+      - '-f'
+      - 'Dockerfile'
+      - '.'
+
+  # Push the image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/hallowed-air-406414/github.com/davidtopping02/uod-occupancy-tracker:$COMMIT_SHA'
+
+  # Deploy the image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'uod-occupancy-tracker' # Replace with your Cloud Run service name
+      - '--image'
+      - 'gcr.io/hallowed-air-406414/github.com/davidtopping02/uod-occupancy-tracker:$COMMIT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+timeout: '1600s'
