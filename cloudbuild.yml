@@ -1,3 +1,7 @@
+options:
+  logging: 'CLOUD_LOGGING_ONLY'
+  default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET'
+
 steps:
   # Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
@@ -21,11 +25,13 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'uod-occupancy-tracker' # Replace with your Cloud Run service name
+      - 'uod-occupancy-tracker' # Your Cloud Run service name
       - '--image'
       - 'gcr.io/hallowed-air-406414/github.com/davidtopping02/uod-occupancy-tracker:$COMMIT_SHA'
       - '--region'
       - 'us-central1'
       - '--platform'
       - 'managed'
+      - '--allow-unauthenticated'
+
 timeout: '1600s'
