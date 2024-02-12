@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { SharedModule } from './shared/shared.module';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     NgbModule,
-    CoreModule,
     SharedModule
   ],
   providers: [],

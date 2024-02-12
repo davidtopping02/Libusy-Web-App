@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 
 @NgModule({
   declarations: [
-    SplashScreenComponent
+    NavbarComponent
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    NavbarComponent
   ]
 })
 export class CoreModule { }
