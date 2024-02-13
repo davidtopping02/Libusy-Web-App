@@ -1,0 +1,18 @@
+.occupancy-indicator-background {
+    width: 80%;
+    height: 30px;
+    background-color: #ddd;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.occupancy-indicator-foreground {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 10px;
+}
