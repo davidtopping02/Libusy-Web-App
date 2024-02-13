@@ -1,8 +1,8 @@
 {
   "name": "uod-library-occupancy-angular-app",
   "short_name": "uod-library-occupancy-angular-app",
-  "theme_color": "#2b2724ff",
-  "background_color": "#2b2724ff",
+  "theme_color": "#3d63ebff",
+  "background_color": "#3d63ebff",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
