@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
+@import '@fortawesome/fontawesome-free/scss/brands.scss';
+
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+/* Global Colours */
+:root {
+    /* Primary colors */
+    --color-grey: #2b2724ff;
+    --color-blue: #3d63ebff;
+    --color-red: #ff575fff;
+    --color-green: #00d672ff;
+
+    /* UI colors */
+    --color-ui-orange: #f55636ff;
+    --color-ui-silver: #f2f2f2ff;
+    --color-ui-red: #ff0026ff;
+    --color-ui-yellow: #ffb300ff;
+    --color-ui-green: #00a357ff;
+    --color-ui-navy: #111c45ff;
+
+    /* Background colors */
+    --color-background-blue: #cee3f5ff;
+    --color-background-grey: #cee3f5ff;
+    --color-background-red: #facbc0ff;
+    --color-background-green: #b9edceff;
+    --color-background-yellow: #b9edceff;
+    --color-background-cream: #fffaf2ff;
+
+    /* Font Colours */
+    --color-font-light: #e3e3e3ff;
+    --color-font-dark: #3b3b3bff;
+    --color-font-blue: #4467e3ff;
+    --color-font-clicked-link: #9644e3ff;
+}
+
+/* Baxter Fonts */
+@font-face {
+    font-family: 'Baxter';
+    src: url('./assets/fonts/Baxter-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Baxter';
+    src: url('./assets/fonts/Baxter-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Baxter';
+    src: url('./assets/fonts/Baxter-RegularItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* BaxterSans Fonts */
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-BoldItalic.otf') format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-Medium.otf') format('opentype');
+    font-weight: 500;
+    /* Medium */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-MediumItalic.otf') format('opentype');
+    font-weight: 500;
+    /* Medium */
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-RegularItalic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-Semibold.otf') format('opentype');
+    font-weight: 600;
+    /* Semi-bold */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BaxterSans';
+    src: url('./assets/fonts/BaxterSans-SemiboldItalic.otf') format('opentype');
+    font-weight: 600;
+    /* Semi-bold */
+    font-style: italic;
+}
+
+body {
+    color: var(--color-font-blue);
+    font-family: 'BaxterSans', sans-serif;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.italic-text {
+    font-style: italic;
+}
+
+.bold-italic-text {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.medium-text {
+    font-weight: 500;
+}
+
+/* Change link color on hover and when active or visited */
+a:hover,
+a:active,
+a:visited {
+    color: var(--color-font-clicked-link);
+}
+
+h1 {
+    font-weight: bold;
+}
