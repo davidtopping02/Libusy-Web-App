@@ -1,0 +1,18 @@
+/* Customizing navbar color */
+.navbar {
+    background-color: var(--color-grey) !important;
+}
+
+/* Customizing navbar link and icon colors */
+.nav-link,
+.navbar-toggler {
+    color: var(--color-font-light);
+    font-size: 20px;
+}
+
+.navbar {
+
+    /* Optional: If you want to use padding instead of setting a fixed height */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

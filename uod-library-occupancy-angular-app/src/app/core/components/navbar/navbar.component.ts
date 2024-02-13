@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import mdbCollapse from "mdb-angular-ui-kit"
 
 @Component({
-  selector: 'navbar',
+  selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
 
