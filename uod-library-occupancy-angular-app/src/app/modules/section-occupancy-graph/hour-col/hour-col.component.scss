@@ -1,20 +1,20 @@
-/* Default size for desktop */
 th {
     font-size: 16px;
+    margin-top: 0px;
+    padding-top: 0px;
 }
 
-table {
-    width: 60%;
+td {
+    --color: rgba(61, 99, 235, 0.8);
 }
+
 
 /* Smaller screens (tablets) */
 @media (max-width: 768px) {
     th {
         font-size: 14px;
-    }
-
-    table {
-        width: 80%;
+        margin-top: 0px;
+        padding-top: 0px;
     }
 }
 
@@ -22,9 +22,8 @@ table {
 @media (max-width: 480px) {
     th {
         font-size: 9px;
+        padding: 0px;
+        margin-top: 0px;
     }
 
-    table {
-        width: 70%;
-    }
 }
