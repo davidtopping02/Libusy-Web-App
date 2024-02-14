@@ -1,0 +1,30 @@
+/* Default size for desktop */
+th {
+    font-size: 16px;
+}
+
+table {
+    width: 60%;
+}
+
+/* Smaller screens (tablets) */
+@media (max-width: 768px) {
+    th {
+        font-size: 14px;
+    }
+
+    table {
+        width: 80%;
+    }
+}
+
+/* Very small screens (phones) */
+@media (max-width: 480px) {
+    th {
+        font-size: 9px;
+    }
+
+    table {
+        width: 70%;
+    }
+}
