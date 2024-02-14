@@ -1,0 +1,29 @@
+th {
+    font-size: 16px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+td {
+    --color: rgba(61, 99, 235, 0.8);
+}
+
+
+/* Smaller screens (tablets) */
+@media (max-width: 768px) {
+    th {
+        font-size: 14px;
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+}
+
+/* Very small screens (phones) */
+@media (max-width: 480px) {
+    th {
+        font-size: 9px;
+        padding: 0px;
+        margin-top: 0px;
+    }
+
+}
