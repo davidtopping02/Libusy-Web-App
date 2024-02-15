@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { HourTemplate } from "../templates/hour-col-template.model";
 
 @Component({
@@ -9,6 +9,4 @@ import { HourTemplate } from "../templates/hour-col-template.model";
 })
 export class HourColComponent {
   @Input() colData: HourTemplate = { time: '12AM', value: 0, current: false };
-  @Input() currentHour: boolean = false;
-
 }

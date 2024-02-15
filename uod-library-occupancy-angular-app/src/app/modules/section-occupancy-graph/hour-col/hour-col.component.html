@@ -1,2 +1,2 @@
 <th> {{ colData.time }} </th>
-<td style="--size: calc( {{colData.value }}/ 100 );"></td>
+<td [class.current-hour]="colData.current" style="--size: calc( {{colData.value}} / 100 );"></td>

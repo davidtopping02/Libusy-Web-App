@@ -8,21 +8,25 @@ import { HourTemplate } from '../templates/hour-col-template.model';
 })
 export class SectionGraphComponent {
 
-  // generates an array of HourTemplate objects representing 12 hours, populating each object with the time (formatted with AM or PM), a random number value, and a boolean indicating whether it's the current hour. 
-  dayArray: HourTemplate[] = Array.from({ length: 12 }, (_, i) => {
+  dayArray: HourTemplate[] = [];
 
+  constructor() {
+    this.initializeDayArray();
+  }
+
+  private initializeDayArray(): void {
     const currentHour = new Date().getHours();
-    const hour = currentHour - 2 + i;
-    const normalizedHour = hour % 24;
-    const amPm = normalizedHour >= 12 ? 'p' : 'a';
-    const displayHour = normalizedHour > 12 ? normalizedHour - 12 : normalizedHour === 0 ? 12 : normalizedHour;
-    const randomNum = Math.floor(Math.random() * 100) + 1;
-    const isCurrent = i === 2;
-    return {
-      time: `${displayHour}${amPm}`,
-      value: randomNum,
-      current: isCurrent
-    };
-  });
-
+    this.dayArray = Array.from({ length: 12 }, (_, i) => {
+      const hour = (currentHour - 2 + i + 24) % 24; // Adjust for hours less than 0
+      const amPm = hour >= 12 ? 'p' : 'a';
+      const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
+      const randomNum = Math.floor(Math.random() * 100) + 1;
+      const isCurrent = currentHour === hour; // Check if this hour is the current hour
+      return {
+        time: `${displayHour}${amPm}`,
+        value: randomNum,
+        current: isCurrent
+      } as HourTemplate;
+    });
+  }
 }
