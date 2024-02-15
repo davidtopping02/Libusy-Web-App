@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import mdbCollapse from "mdb-angular-ui-kit"
 
 @Component({
@@ -8,4 +8,16 @@ import mdbCollapse from "mdb-angular-ui-kit"
 })
 export class NavbarComponent {
 
+  // You might want to adjust this value based on your design breakpoints
+  private mobileWidthThreshold: number = 990
+
+  isMobile(): boolean {
+    return window.innerWidth <= this.mobileWidthThreshold;
+  }
+
+  toggleNavbarCollapse(navCollapse: any) {
+    if (this.isMobile()) {
+      navCollapse.toggle();
+    }
+  }
 }
