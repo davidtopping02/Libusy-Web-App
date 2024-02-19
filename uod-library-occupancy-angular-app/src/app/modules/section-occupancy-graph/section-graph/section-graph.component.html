@@ -4,4 +4,10 @@
             <tr *ngFor="let hourData of dayArray" app-hour-col [colData]="hourData"></tr>
         </tbody>
     </table>
+
+    <div class="live-indicator-block">
+        <span class="live-indicator">
+            <i class="fa fa-circle blink" aria-hidden="true"></i>Live
+        </span>
+    </div>
 </div>
