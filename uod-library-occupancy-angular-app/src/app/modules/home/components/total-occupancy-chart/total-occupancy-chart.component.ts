@@ -1,4 +1,8 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { OccupancyDataItem } from '../../../../store/occupancy.models';
+import { selectOccupancyDataBySectionId } from '../../../../store/occupancy.selectors';
 
 @Component({
   selector: 'app-total-occupancy-chart',
@@ -7,17 +11,25 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 
 
-export class TotalOccupancyChartComponent implements OnChanges {
-  @Input() occupancy: number = 1;
+export class TotalOccupancyChartComponent implements OnInit {
+  occupancy: number = 1;
   backgroundColor: string = 'green';
   widthPercentage: string = '1';
+  occupancyDataItem$: Observable<OccupancyDataItem | undefined> | undefined;
+
+  constructor(private store: Store) { }
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['occupancy']) {
-      this.setBackgroundColor();
-      this.setWidthPercentage();
-    }
+  ngOnInit(): void {
+    // Use the selector to get the occupancy data for section 1
+    this.occupancyDataItem$ = this.store.pipe(select(selectOccupancyDataBySectionId(1)));
+    this.occupancyDataItem$.subscribe((dataItem: OccupancyDataItem | undefined) => {
+      if (dataItem) {
+        this.occupancy = dataItem.occupancy_percentage;
+        this.setWidthPercentage();
+        this.setBackgroundColor();
+      }
+    });
   }
 
   private setBackgroundColor(): void {
@@ -33,12 +45,16 @@ export class TotalOccupancyChartComponent implements OnChanges {
   }
 
   private setWidthPercentage(): void {
-    if (this.occupancy <= 50) {
-      this.widthPercentage = '40%';
-    } else if (this.occupancy <= 75) {
-      this.widthPercentage = '70%';
-    } else {
-      this.widthPercentage = '90%';
+    let percentage = this.occupancy;
+
+    // Ensure percentage is within the range [10, 90]
+    if (percentage < 10) {
+      percentage = 10;
+    } else if (percentage > 90) {
+      percentage = 90;
     }
+
+    this.widthPercentage = percentage.toString().concat("%");
   }
+
 }
