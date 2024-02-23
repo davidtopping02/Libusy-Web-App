@@ -5,6 +5,8 @@ import { CoreRoutingModule } from './core-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     CoreRoutingModule,
     MdbCollapseModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    HttpClientModule
   ]
 })
 export class CoreModule { }
