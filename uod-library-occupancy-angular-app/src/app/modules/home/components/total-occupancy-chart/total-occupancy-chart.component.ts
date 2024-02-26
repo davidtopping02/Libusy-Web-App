@@ -37,7 +37,7 @@ export class TotalOccupancyChartComponent implements OnInit {
       this.backgroundColor = 'var(--color-ui-green)';
     } else if (this.occupancy >= 51 && this.occupancy <= 75) {
       this.backgroundColor = 'var(--color-ui-yellow)';
-    } else if (this.occupancy >= 76 && this.occupancy <= 100) {
+    } else if (this.occupancy >= 76) {
       this.backgroundColor = 'var(--color-ui-red)';
     } else {
       this.backgroundColor = 'grey';
