@@ -16,7 +16,7 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
     getOccupancyData(): Observable<{ data: OccupancyDataItem[] }> {
-        return this.http.get<{ data: OccupancyDataItem[] }>('http://35.229.61.99/occupancy').pipe(
+        return this.http.get<{ data: OccupancyDataItem[] }>('https://uod.davidtopping.dev/api/occupancy').pipe(
             catchError(error => {
                 console.error('Error fetching occupancy data:', error);
                 return throwError(error);
