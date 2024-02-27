@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { loadOccupancy } from 'src/app/store/occupancy.actions';
-import { selectOccupancyData } from 'src/app/store/occupancy.selectors'; // Assuming you have this selector
+import { selectOccupancyData, selectFetchTime } from 'src/app/store/occupancy.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +13,16 @@ import { selectOccupancyData } from 'src/app/store/occupancy.selectors'; // Assu
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
+  fetchTime$!: Observable<string>; // Initialize fetchTime$ with ! operator
+
+  occupancyData: any; // Change the type according to your store structure
 
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
     this.store.dispatch(loadOccupancy());
+    this.fetchTime$ = this.store.pipe(select(selectFetchTime));
+
   }
 
   ngOnDestroy() {
