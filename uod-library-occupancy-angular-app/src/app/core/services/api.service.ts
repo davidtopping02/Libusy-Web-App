@@ -2,21 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { OccupancyDataItem } from 'src/app/store/occupancy.models';
-
-export interface OccupancyApiResponse {
-    // Define the expected properties of your API response here
-    occupancyDataItems: OccupancyDataItem[];
-}
-
+import { OccupancyState, SectionData } from 'src/app/store/occupancy.models';
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
-
     constructor(private http: HttpClient) { }
-    getOccupancyData(): Observable<{ data: OccupancyDataItem[] }> {
-        return this.http.get<{ data: OccupancyDataItem[] }>('https://uod.davidtopping.dev/api/occupancy').pipe(
+
+    getOccupancyData(): Observable<SectionData[]> {
+        return this.http.get<SectionData[]>('https://uod.davidtopping.dev/api/occupancy').pipe(
             catchError(error => {
                 console.error('Error fetching occupancy data:', error);
                 return throwError(error);

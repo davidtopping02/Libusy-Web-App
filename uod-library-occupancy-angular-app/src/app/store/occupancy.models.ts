@@ -1,13 +1,17 @@
-export interface OccupancyDataItem {
-    section_id: number;
-    description: string;
-    current_occupancy: number;
-    total_occupancy: number;
+export interface HourData {
+    time: string;
     occupancy_percentage: number;
 }
 
+export interface SectionData {
+    section_id: number;
+    description: string;
+    hours: HourData[];
+}
+
 export interface OccupancyState {
-    data: any;
+    data: SectionData[];
+    fetch_time: string;
     error: any;
     status: any;
 }

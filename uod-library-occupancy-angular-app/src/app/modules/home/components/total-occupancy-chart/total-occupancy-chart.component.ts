@@ -1,35 +1,40 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { OccupancyDataItem } from '../../../../store/occupancy.models';
+import { SectionData, HourData } from '../../../../store/occupancy.models';
 import { selectOccupancyDataBySectionId } from '../../../../store/occupancy.selectors';
+import { OccupancyState } from '../../../../store/occupancy.models';
 
 @Component({
   selector: 'app-total-occupancy-chart',
   templateUrl: './total-occupancy-chart.component.html',
   styleUrls: ['./total-occupancy-chart.component.scss']
 })
-
-
 export class TotalOccupancyChartComponent implements OnInit {
   occupancy: number = 1;
   backgroundColor: string = 'green';
   widthPercentage: string = '1';
-  occupancyDataItem$: Observable<OccupancyDataItem | undefined> | undefined;
+  sectionDataItem$: Observable<SectionData | undefined> | undefined;
 
-  constructor(private store: Store) { }
-
+  constructor(private store: Store<OccupancyState>) { }
 
   ngOnInit(): void {
     // Use the selector to get the occupancy data for section 1
-    this.occupancyDataItem$ = this.store.pipe(select(selectOccupancyDataBySectionId(1)));
-    this.occupancyDataItem$.subscribe((dataItem: OccupancyDataItem | undefined) => {
+    this.sectionDataItem$ = this.store.pipe(select(selectOccupancyDataBySectionId(1)));
+    this.sectionDataItem$.subscribe((dataItem: SectionData | undefined) => {
       if (dataItem) {
-        this.occupancy = Math.round(dataItem.occupancy_percentage);
-        this.setWidthPercentage();
-        this.setBackgroundColor();
+        const lastHourData = this.getLastHourData(dataItem.hours);
+        if (lastHourData) {
+          this.occupancy = Math.round(lastHourData.occupancy_percentage);
+          this.setWidthPercentage();
+          this.setBackgroundColor();
+        }
       }
     });
+  }
+
+  private getLastHourData(hours: HourData[]): HourData | undefined {
+    return hours.length > 0 ? hours[hours.length - 1] : undefined;
   }
 
   private setBackgroundColor(): void {
@@ -54,7 +59,6 @@ export class TotalOccupancyChartComponent implements OnInit {
       percentage = 90;
     }
 
-    this.widthPercentage = percentage.toString().concat("%");
+    this.widthPercentage = percentage.toString().concat('%');
   }
-
 }
