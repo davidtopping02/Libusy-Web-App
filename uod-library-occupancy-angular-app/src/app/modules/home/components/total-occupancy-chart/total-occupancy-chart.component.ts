@@ -25,7 +25,7 @@ export class TotalOccupancyChartComponent implements OnInit {
     this.occupancyDataItem$ = this.store.pipe(select(selectOccupancyDataBySectionId(1)));
     this.occupancyDataItem$.subscribe((dataItem: OccupancyDataItem | undefined) => {
       if (dataItem) {
-        this.occupancy = dataItem.occupancy_percentage;
+        this.occupancy = Math.round(dataItem.occupancy_percentage);
         this.setWidthPercentage();
         this.setBackgroundColor();
       }
