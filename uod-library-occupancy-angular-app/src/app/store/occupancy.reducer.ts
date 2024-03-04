@@ -5,8 +5,7 @@ import { OccupancyState } from './occupancy.models'
 export const initialState: OccupancyState = {
     data: [],
     error: "null",
-    status: 'pending',
-    fetch_time: "null"
+    status: 'pending'
 }
 
 export const occupancyReducer = createReducer(

@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
 import { loadOccupancy } from 'src/app/store/occupancy.actions';
-import { selectOccupancyData, selectFetchTime } from 'src/app/store/occupancy.selectors';
-import { Observable } from 'rxjs';
+import { selectFetchTime } from 'src/app/store/occupancy.selectors';
 
 @Component({
   selector: 'app-home',
@@ -13,20 +12,24 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
-  fetchTime$!: Observable<string>; // Initialize fetchTime$ with ! operator
-
-  occupancyData: any; // Change the type according to your store structure
+  fetchTime$!: Observable<string>;
+  occupancyData: any;
 
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
     this.store.dispatch(loadOccupancy());
-    this.fetchTime$ = this.store.pipe(select(selectFetchTime));
-
+    this.fetchTime$ = this.store.pipe(
+      select(selectFetchTime),
+      map((timestamp: string) => {
+        const date = new Date(timestamp);
+        return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+      }),
+      takeUntil(this.unsubscribe$)
+    );
   }
 
   ngOnDestroy() {
-    // Complete the unsubscribe$ observable to clean up the subscription
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
