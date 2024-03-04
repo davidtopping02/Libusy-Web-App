@@ -36,9 +36,13 @@ export const selectOccupancyDataBySectionId = (sectionId: number) => createSelec
     }
 );
 
-
-
 export const selectFetchTime = createSelector(
     selectOccupancyState,
-    (state: OccupancyState) => state.fetch_time
+    (state: OccupancyState): string => {
+        if (typeof state.data === 'object' && 'fetch_time' in state.data) {
+            return state.data.fetch_time as string;
+        } else {
+            return "00:00";
+        }
+    }
 );

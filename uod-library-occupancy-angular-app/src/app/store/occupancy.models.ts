@@ -11,7 +11,6 @@ export interface SectionData {
 
 export interface OccupancyState {
     data: SectionData[];
-    fetch_time: string;
     error: any;
     status: any;
 }
