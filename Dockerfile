@@ -14,7 +14,7 @@ RUN npm install
 COPY uod-library-occupancy-angular-app/ ./
 
 # Build the Angular app
-RUN npm run build --prod
+RUN npm run build --configuration production
 
 # Use an official NGINX image as the web server
 FROM nginx:alpine
