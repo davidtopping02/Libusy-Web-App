@@ -13,8 +13,8 @@ RUN npm install
 # Copy the rest of the application code to the container
 COPY uod-library-occupancy-angular-app/ ./
 
-# Build the Angular app
-RUN npm run build -- --configuration production
+# Build the Angular app with specific flags
+RUN npx ng build --prod --aot --output-hashing=all
 
 # Use an official NGINX image as the web server
 FROM nginx:alpine
