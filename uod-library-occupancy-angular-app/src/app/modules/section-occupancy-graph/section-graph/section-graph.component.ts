@@ -23,9 +23,7 @@ export class SectionGraphComponent implements OnInit {
     const currentHour = new Date().getHours();
     this.dayArray = Array.from({ length: 12 }, (_, i) => {
       const hour = (currentHour - 2 + i + 24) % 24;
-      if (hour === 0) {
-        return null; // Skip this hour
-      }
+
       const isCurrent = currentHour === hour;
 
       // Convert 24-hour time to 12-hour format and add AM or PM
