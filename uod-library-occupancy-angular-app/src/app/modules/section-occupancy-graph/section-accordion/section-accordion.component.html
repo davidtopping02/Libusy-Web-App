@@ -4,7 +4,10 @@
             <!-- Check if section_id is not equal to 1 -->
             <ng-container *ngIf="section.section_id !== 1">
                 <mdb-accordion-item [collapsed]="i !== 1">
-                    <ng-template mdbAccordionItemHeader>{{ section.description }}</ng-template>
+                    <ng-template mdbAccordionItemHeader>
+                        {{ section.description }}
+                        <app-occupancy-description-badge [sectionData]="section"> </app-occupancy-description-badge>
+                    </ng-template>
                     <ng-template mdbAccordionItemBody>
                         <app-section-graph [sectionData]="section"></app-section-graph>
                     </ng-template>

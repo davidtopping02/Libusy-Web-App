@@ -5,6 +5,7 @@ import { SectionGraphComponent } from './section-graph/section-graph.component';
 import { HourColComponent } from './hour-col/hour-col.component';
 import { SectionAccordionComponent } from './section-accordion/section-accordion.component';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
+import { OccupancyDescriptionBadgeComponent } from './occupancy-description-badge/occupancy-description-badge.component';
 
 
 
@@ -12,7 +13,8 @@ import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
   declarations: [
     SectionGraphComponent,
     HourColComponent,
-    SectionAccordionComponent
+    SectionAccordionComponent,
+    OccupancyDescriptionBadgeComponent
   ],
   imports: [
     CommonModule,
