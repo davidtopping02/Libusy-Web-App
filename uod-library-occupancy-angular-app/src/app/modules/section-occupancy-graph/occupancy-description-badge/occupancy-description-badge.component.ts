@@ -29,9 +29,9 @@ export class OccupancyDescriptionBadgeComponent implements OnInit {
   setOccupancyLevel(percentage: number): void {
     if (percentage <= 25) {
       this.occupancyLevel = { class: 'badge-success', text: 'Quiet' };
-    } else if (percentage <= 50) {
+    } else if (percentage <= 60) {
       this.occupancyLevel = { class: 'badge-success', text: 'Moderate' };
-    } else if (percentage <= 75) {
+    } else if (percentage <= 85) {
       this.occupancyLevel = { class: 'badge-warning ', text: 'Busy' };
     } else {
       this.occupancyLevel = { class: 'badge-danger', text: 'Very Busy' };
