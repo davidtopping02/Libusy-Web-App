@@ -18,4 +18,13 @@
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 
+<!-- refresh on load (required for pwa) -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+      registration.update();
+    });
+  }
+</script>
+
 </html>
