@@ -1,7 +1,6 @@
 <mdb-accordion [flush]="true">
     <ng-container *ngIf="(sectionData$ | async) as sectionData">
         <ng-container *ngFor="let section of sectionData; let i = index">
-            <!-- Check if section_id is not equal to 1 -->
             <ng-container *ngIf="section.section_id !== 1">
                 <mdb-accordion-item [collapsed]="i !== 1">
                     <ng-template mdbAccordionItemHeader>
