@@ -7,6 +7,7 @@ import { SectionAccordionComponent } from './section-accordion/section-accordion
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { MdbPopoverModule } from 'mdb-angular-ui-kit/popover';
 import { OccupancyDescriptionBadgeComponent } from './occupancy-description-badge/occupancy-description-badge.component';
+import { DayButtonGroupComponent } from './day-button-group/day-button-group.component';
 
 
 
@@ -15,7 +16,8 @@ import { OccupancyDescriptionBadgeComponent } from './occupancy-description-badg
     SectionGraphComponent,
     HourColComponent,
     SectionAccordionComponent,
-    OccupancyDescriptionBadgeComponent
+    OccupancyDescriptionBadgeComponent,
+    DayButtonGroupComponent
   ],
   imports: [
     CommonModule,
