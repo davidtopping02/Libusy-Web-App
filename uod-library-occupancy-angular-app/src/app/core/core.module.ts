@@ -6,11 +6,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    SplashScreenComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     NavbarComponent,
-    HttpClientModule
+    HttpClientModule,
+    SplashScreenComponent
   ]
 })
 export class CoreModule { }

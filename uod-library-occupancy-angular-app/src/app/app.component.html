@@ -1,2 +1,5 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<app-splash-screen *ngIf="isLoading" @fadeAnimation></app-splash-screen>
+<div *ngIf="!isLoading" @fadeAnimation>
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+</div>

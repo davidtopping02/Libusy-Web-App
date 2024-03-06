@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-import { loadOccupancy } from 'src/app/store/occupancy.actions';
 import { selectFetchTime } from 'src/app/store/occupancy.selectors';
 
 @Component({
@@ -18,7 +17,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private store: Store<any>) { }
 
   ngOnInit() {
-    this.store.dispatch(loadOccupancy());
     this.fetchTime$ = this.store.pipe(
       select(selectFetchTime),
       map((timestamp: string) => {
