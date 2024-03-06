@@ -1,2 +1,4 @@
 <th> {{ colData.time }} </th>
-<td [class.current-hour]="colData.current" style="--size: calc( {{colData.value}} / 100 );"></td>
+<td type="button" placement="top" mdbPopover="{{ getPopoverMessage() }}" tabindex="0" mdbWavesEffect trigger="focus"
+    [class.current-hour]="colData.current" style="--size: calc( {{colData.value}} / 100 );">
+</td>

@@ -12,6 +12,10 @@ td {
     --color: rgba(61, 99, 235);
 }
 
+::ng-deep .popover {
+    background-color: var(--color-background-blue);
+}
+
 
 @media (max-width: 768px) {
     th {
