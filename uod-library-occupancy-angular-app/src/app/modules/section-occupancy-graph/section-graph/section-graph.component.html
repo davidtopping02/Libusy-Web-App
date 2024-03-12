@@ -1,19 +1,10 @@
+<!-- section-graph.component.html -->
 <div class="current-section-occupancy">
-
-
-    <!-- <div class="live-indicator-block mb-3">
-        <span class="live-indicator">
-            <i class="fa fa-circle blink" aria-hidden="true"></i>Live
-        </span>
-    </div> -->
-
-
-    <table class="charts-css column show-labels  show-7-secondary-axes data-spacing-2 ">
+    <table class="charts-css column show-labels show-7-secondary-axes data-spacing-2">
         <tbody>
-            <tr *ngFor="let hourData of dayArray" app-hour-col [colData]="hourData"></tr>
+            <tr *ngFor="let hourData of dayArray" app-hour-col [colData]="hourData" [showTime]="isCurrentDay"></tr>
         </tbody>
     </table>
 
-    <app-day-button-group></app-day-button-group>
-
+    <app-day-button-group (daySelected)="handleDaySelected($event)"></app-day-button-group>
 </div>
