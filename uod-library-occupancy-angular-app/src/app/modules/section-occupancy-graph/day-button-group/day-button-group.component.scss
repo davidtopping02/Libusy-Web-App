@@ -2,3 +2,17 @@
     // color: white;
     background-color: var(--color-background-blue);
 }
+.btn-current-day {
+    /* Remove the text-decoration line if it's no longer needed */
+    position: relative; /* Ensures that the pseudo-element is positioned relative to the button */
+}
+
+.btn-current-day::after {
+    content: ''; 
+    position: absolute; 
+    bottom: -2px; 
+    left: 0;
+    right: 0;
+    height: 2px; 
+    background-color: var(--color-blue); 
+}

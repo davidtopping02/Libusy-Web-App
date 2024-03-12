@@ -1,6 +1,8 @@
 <div class="btn-group btn-group-sm mt-3" role="group" aria-label="Days of the week">
     <button *ngFor="let day of daysOfWeek; let i = index" type="button" class="btn" [ngClass]="{
-              'btn-selected': isSelected(day), 'btn-outline': !isSelected(day) }" (click)="selectDay(day)">
+              'btn-selected': isSelected(day), 
+              'btn-outline': !isSelected(day),
+              'btn-current-day': isCurrentDay(day)}" (click)="selectDay(day)">
         {{ getDayName(i) }}
     </button>
 </div>
