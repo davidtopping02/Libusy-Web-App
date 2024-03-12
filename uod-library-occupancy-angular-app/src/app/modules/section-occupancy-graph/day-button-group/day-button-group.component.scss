@@ -11,8 +11,8 @@
     content: ''; 
     position: absolute; 
     bottom: -2px; 
-    left: 0;
-    right: 0;
+    left: 5px; /* Adjust this value as needed */
+    right: 5px; /* Adjust this value as needed */
     height: 2px; 
     background-color: var(--color-blue); 
 }
