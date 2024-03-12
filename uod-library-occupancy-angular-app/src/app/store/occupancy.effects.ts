@@ -4,19 +4,20 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as OccupancyActions from './occupancy.actions';
 import { ApiService } from '../core/services/api.service';
-import { SectionData } from './occupancy.models'; // Ensure you're using OccupancyState
+import { OccupancyState } from './occupancy.models'; 
 
 @Injectable()
 export class OccupancyEffects {
     loadOccupancy$ = createEffect(() => this.actions$.pipe(
         ofType(OccupancyActions.loadOccupancy),
-        mergeMap(() => this.apiService.getOccupancyData().pipe(
-            map((data: SectionData[]) => OccupancyActions.loadOccupancySuccess({
-                data: data,
-                fetch_time: new Date().toISOString()
-            })),
-            catchError(error => of(OccupancyActions.loadOccupancyFailure({ error })))
-        ))
+        mergeMap(() => this.apiService.getOccupancyData()
+            .pipe(
+                map((occupancyState: OccupancyState) => OccupancyActions.loadOccupancySuccess({
+                    occupancyState 
+                })),
+                catchError(error => of(OccupancyActions.loadOccupancyFailure({ error })))
+            )
+        )
     ));
 
     constructor(

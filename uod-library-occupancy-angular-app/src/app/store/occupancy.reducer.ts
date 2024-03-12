@@ -1,11 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OccupancyActions from './occupancy.actions';
-import { OccupancyState } from './occupancy.models'
+import { OccupancyState } from './occupancy.models';
 
 export const initialState: OccupancyState = {
     data: [],
-    error: "null",
-    status: 'pending'
+    fetch_time: "",
+    error: null,
+    status: 'pending',
 }
 
 export const occupancyReducer = createReducer(
@@ -13,15 +14,16 @@ export const occupancyReducer = createReducer(
 
     on(OccupancyActions.loadOccupancy, (state) => ({ ...state, status: 'loading' })),
 
-    on(OccupancyActions.loadOccupancySuccess, (state, { data }) => ({
+    on(OccupancyActions.loadOccupancySuccess, (state, { occupancyState }) => ({
         ...state,
-        data: data,
+        ...occupancyState,
         status: 'success',
         error: null,
     })),
+
     on(OccupancyActions.loadOccupancyFailure, (state, { error }) => ({
         ...state,
-        error: error,
+        error,
         status: 'error'
     })),
 );

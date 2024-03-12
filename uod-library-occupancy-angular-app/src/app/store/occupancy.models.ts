@@ -6,11 +6,14 @@ export interface HourData {
 export interface SectionData {
     section_id: number;
     description: string;
-    hours: HourData[];
+    total_occupancy: number;
+    current_occupancy_percentage: number;
+    occupancy?: HourData[][];
 }
 
 export interface OccupancyState {
     data: SectionData[];
-    error: any;
-    status: any;
+    fetch_time: string;
+    error?: any;
+    status?: any;
 }
