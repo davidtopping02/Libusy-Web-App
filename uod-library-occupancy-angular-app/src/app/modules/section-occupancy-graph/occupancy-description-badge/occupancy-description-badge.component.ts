@@ -17,10 +17,7 @@ export class OccupancyDescriptionBadgeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const currentHour = new Date().getHours();
-    let occupancyPercentage = this.sectionData.hours
-      .filter((data: any) => Number(data.time.split(':')[0]) === currentHour)
-      .map((data: any) => data.occupancy_percentage > 100 ? 100 : data.occupancy_percentage)[0] || 10;
+    let occupancyPercentage = this.sectionData.current_occupancy_percentage
 
     // Set the occupancy level based on the calculated percentage
     this.setOccupancyLevel(occupancyPercentage);

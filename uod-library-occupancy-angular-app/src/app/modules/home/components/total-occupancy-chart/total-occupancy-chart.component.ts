@@ -23,18 +23,14 @@ export class TotalOccupancyChartComponent implements OnInit {
     this.sectionDataItem$ = this.store.pipe(select(selectOccupancyDataBySectionId(1)));
     this.sectionDataItem$.subscribe((dataItem: SectionData | undefined) => {
       if (dataItem) {
-        const lastHourData = this.getLastHourData(dataItem.hours);
-        if (lastHourData) {
-          this.occupancy = Math.round(lastHourData.occupancy_percentage);
+        const currentOccupancyPercentage = dataItem.current_occupancy_percentage; 
+        if (currentOccupancyPercentage !== undefined) { 
+          this.occupancy = Math.round(currentOccupancyPercentage);
           this.setWidthPercentage();
           this.setBackgroundColor();
         }
       }
     });
-  }
-
-  private getLastHourData(hours: HourData[]): HourData | undefined {
-    return hours.length > 0 ? hours[hours.length - 1] : undefined;
   }
 
   private setBackgroundColor(): void {

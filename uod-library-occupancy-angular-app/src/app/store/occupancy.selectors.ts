@@ -2,22 +2,12 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { OccupancyState, SectionData } from './occupancy.models';
 
 export const selectOccupancyState = createFeatureSelector<OccupancyState>('occupancy');
-
 export const selectOccupancyData = createSelector(
     selectOccupancyState,
-    (state): SectionData[] => {
-        // Check if state.data is actually an object containing a 'data' property that is an array
-        if (typeof state.data === 'object' && 'data' in state.data && Array.isArray(state.data.data)) {
-            return state.data.data as SectionData[];
-        } else if (Array.isArray(state.data)) {
-            return state.data;
-        } else {
-            // Fallback case, if the data is neither - likely an error or unexpected state shape
-            console.error('Unexpected state.data structure:', state.data);
-            return [];
-        }
-    }
+    (state: OccupancyState) => state.data
 );
+
+
 
 export const selectOccupancyError = createSelector(
     selectOccupancyState,
@@ -29,20 +19,28 @@ export const selectOccupancyStatus = createSelector(
     (state: OccupancyState) => state.status
 );
 
-export const selectOccupancyDataBySectionId = (sectionId: number) => createSelector(
+export const selectFetchTime = createSelector(
+    selectOccupancyState,
+    (state: OccupancyState) => state.fetch_time
+);
+
+export const selectOccupancyDataBySectionId = (sectionId: number, day: number = new Date().getDay()) => createSelector(
     selectOccupancyData,
     (data: SectionData[]): SectionData | undefined => {
-        return data.find((section: SectionData) => section.section_id === sectionId);
+        const section = data.find((section: SectionData) => section.section_id === sectionId);
+
+        if (section && section.occupancy && Array.isArray(section.occupancy[day])) {
+            const modifiedSection: SectionData = { ...section, occupancy: [section.occupancy[day]] };
+            return modifiedSection;
+        }
+        return section;
     }
 );
 
-export const selectFetchTime = createSelector(
-    selectOccupancyState,
-    (state: OccupancyState): string => {
-        if (typeof state.data === 'object' && 'fetch_time' in state.data) {
-            return state.data.fetch_time as string;
-        } else {
-            return "00:00";
-        }
+export const selectCurrentOccupancyPercentageBySectionId = (sectionId: number) => createSelector(
+    selectOccupancyData,
+    (sections: SectionData[]): number | undefined => {
+        const section = sections.find(s => s.section_id === sectionId);
+        return section ? section.current_occupancy_percentage : undefined;
     }
 );
