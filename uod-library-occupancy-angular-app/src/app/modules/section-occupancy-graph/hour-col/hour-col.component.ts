@@ -9,8 +9,22 @@ import { HourTemplate } from "../templates/hour-col-template.model";
 })
 export class HourColComponent {
   @Input() colData: HourTemplate = { time: '12AM', value: 0, current: false };
+  @Input() showTime: boolean = true;
 
-  // Method to determine the message
+
+  isEvenHour(): boolean {
+    const hourMatch = this.colData.time.match(/\d+/);
+    const hour = hourMatch ? parseInt(hourMatch[0], 10) : null;
+    return hour !== null ? hour % 2 === 0 : false;
+  }
+
+  formatTime(time: string): string {
+    if (!this.showTime) {
+      return time.replace(':00', '');
+    }
+    return time;
+  }
+
   getPopoverMessage(): string {
     return `${this.colData.time}:  ${this.colData.value}%`;
   }

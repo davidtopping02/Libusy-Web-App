@@ -11,40 +11,64 @@ export class SectionGraphComponent implements OnInit {
 
   @Input() sectionData!: SectionData;
   dayArray: HourTemplate[] = [];
+  currentDayIndex: number = new Date().getDay();
+  isCurrentDay: boolean = true; 
+
 
   ngOnInit(): void {
-    this.initializeDayArray();
+    this.initializeDayArray(this.currentDayIndex); // Initialize with current day index
   }
 
-  constructor() {
-  }
+  constructor() {}
 
-  private initializeDayArray(): void {
+  handleDaySelected(dayIndex: string) {
+    const selectedDayIndex = parseInt(dayIndex, 10);
+    this.currentDayIndex = selectedDayIndex; 
+    this.isCurrentDay = this.currentDayIndex === new Date().getDay();
+    this.initializeDayArray(this.currentDayIndex);
+}
+
+  private initializeDayArray(dayIndex: number): void {
     const currentDayIndex = new Date().getDay();
     const currentHour = new Date().getHours();
-    const todayOccupancy = this.sectionData.occupancy ? this.sectionData.occupancy[currentDayIndex] : [];
+    const isCurrentDay = dayIndex === currentDayIndex;
   
-    this.dayArray = Array.from({ length: 12 }, (_, i) => {
-      const hour = (currentHour - 2 + i + 24) % 24; 
-      const isCurrent = currentHour === hour;
-      const displayHour = hour % 12 === 0 ? 12 : hour % 12;
-      const amPm = hour < 12 || hour === 24 ? 'am' : 'pm';
-      const hourFormatted = `${displayHour}${amPm}`.padStart(2, '0');
+    const todayOccupancy = this.sectionData.occupancy ? this.sectionData.occupancy[dayIndex] : [];
   
-      // Default value or perhaps a default if no data is present
-      let value = 10; 
-      const hourData = todayOccupancy.find((data: HourData) => {
-        const dataHour = Number(data.time.split(':')[0]);
-        return dataHour === hour;
+    if (isCurrentDay) {
+      this.dayArray = Array.from({ length: 12 }, (_, i) => {
+        const hour = (currentHour - 2 + i + 24) % 24;
+        const isCurrent = currentHour === hour;
+        const hour12 = hour % 12 === 0 ? 12 : hour % 12; 
+        const amPm = hour < 12 || hour === 24 ? 'am' : 'pm';
+        // Apply formatting, ensuring no leading zero for single-digit hours
+        const hourFormatted = `${hour12}${amPm}`;
+  
+        let value = this.getDefaultOccupancyValue(hour, todayOccupancy);
+        return { time: hourFormatted, value, current: isCurrent } as HourTemplate;
       });
-      if (hourData) {
-        value = hourData.occupancy_percentage > 100 ? 100 : hourData.occupancy_percentage;
-      }
-      return {
-        time: hourFormatted,
-        value: value,
-        current: isCurrent
-      } as HourTemplate;
-    }).filter((hour): hour is HourTemplate => hour !== null);
+    } else {
+      // for any other day, display all 24 hours in 24-hour format with ":00"
+      this.dayArray = Array.from({ length: 24 }, (_, hour) => {
+        const hourFormatted = `${hour.toString().padStart(2, '0')}:00`; 
+        const isCurrent = false; 
+  
+        let value = this.getDefaultOccupancyValue(hour, todayOccupancy);
+        return { time: hourFormatted, value, current: isCurrent } as HourTemplate;
+      });
+    }
   }
+  
+  private getDefaultOccupancyValue(hour: number, todayOccupancy: HourData[]): number {
+    let value = 10; // Default value or a fallback
+    const hourData = todayOccupancy.find((data: HourData) => {
+      const dataHour = Number(data.time.split(':')[0]);
+      return dataHour === hour;
+    });
+    if (hourData) {
+      value = hourData.occupancy_percentage > 100 ? 100 : hourData.occupancy_percentage;
+    }
+    return value;
+  }
+  
 }
