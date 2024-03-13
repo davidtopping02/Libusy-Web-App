@@ -32,33 +32,17 @@ export class SectionGraphComponent implements OnInit {
     const currentDayIndex = new Date().getDay();
     const currentHour = new Date().getHours();
     const isCurrentDay = dayIndex === currentDayIndex;
-  
     const todayOccupancy = this.sectionData.occupancy ? this.sectionData.occupancy[dayIndex] : [];
-  
-    if (isCurrentDay) {
-      this.dayArray = Array.from({ length: 12 }, (_, i) => {
-        const hour = (currentHour - 2 + i + 24) % 24;
-        const isCurrent = currentHour === hour;
-        const hour12 = hour % 12 === 0 ? 12 : hour % 12; 
-        const amPm = hour < 12 || hour === 24 ? 'am' : 'pm';
-        // Apply formatting, ensuring no leading zero for single-digit hours
-        const hourFormatted = `${hour12}${amPm}`;
-  
-        let value = this.getDefaultOccupancyValue(hour, todayOccupancy);
-        return { time: hourFormatted, value, current: isCurrent } as HourTemplate;
-      });
-    } else {
-      // for any other day, display all 24 hours in 24-hour format with ":00"
-      this.dayArray = Array.from({ length: 24 }, (_, hour) => {
-        const hourFormatted = `${hour.toString().padStart(2, '0')}:00`; 
-        const isCurrent = false; 
-  
-        let value = this.getDefaultOccupancyValue(hour, todayOccupancy);
-        return { time: hourFormatted, value, current: isCurrent } as HourTemplate;
-      });
-    }
+
+    this.dayArray = Array.from({ length: 24 }, (_, hour) => {
+      const hourFormatted = `${hour.toString().padStart(2, '0')}:00`;
+      const isCurrent = isCurrentDay && currentHour === hour;
+
+      let value = this.getDefaultOccupancyValue(hour, todayOccupancy);
+      return { time: hourFormatted, value, current: isCurrent } as HourTemplate;
+    });
   }
-  
+
   private getDefaultOccupancyValue(hour: number, todayOccupancy: HourData[]): number {
     let value = 10; // Default value or a fallback
     const hourData = todayOccupancy.find((data: HourData) => {

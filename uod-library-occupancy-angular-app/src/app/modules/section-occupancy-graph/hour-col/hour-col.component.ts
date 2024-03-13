@@ -9,7 +9,6 @@ import { HourTemplate } from "../templates/hour-col-template.model";
 })
 export class HourColComponent {
   @Input() colData: HourTemplate = { time: '12AM', value: 0, current: false };
-  @Input() showTime: boolean = true;
 
 
   isEvenHour(): boolean {
@@ -19,10 +18,7 @@ export class HourColComponent {
   }
 
   formatTime(time: string): string {
-    if (!this.showTime) {
       return time.replace(':00', '');
-    }
-    return time;
   }
 
   getPopoverMessage(): string {
