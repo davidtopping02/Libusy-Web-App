@@ -38,12 +38,7 @@ export class AppComponent implements OnInit {
     ).subscribe(() => {
       this.isLoading = false;
     });
-
-    // New addition: Subscribe to the entire store state and log it.
-    this.store.subscribe(state => {
-      console.log('Current store state:', state);
-    });
-
+    
     this.store.dispatch(loadOccupancy());
   }
 }
