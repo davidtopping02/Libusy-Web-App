@@ -3,19 +3,17 @@
 }
 
 h1 {
-    font-size: 60px; /* Default font size */
+    font-size: 60px; 
 }
 
-/* Media query for smaller screens */
 @media only screen and (max-width: 768px) {
     h1 {
-        font-size: 48px; /* Adjust font size for smaller screens */
+        font-size: 48px;
     }
 }
 
-/* Media query for even smaller screens */
 @media only screen and (max-width: 480px) {
     h1 {
-        font-size: 36px; /* Adjust font size for even smaller screens */
+        font-size: 36px; 
     }
 }
