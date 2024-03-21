@@ -7,8 +7,6 @@ export const selectOccupancyData = createSelector(
     (state: OccupancyState) => state.data
 );
 
-
-
 export const selectOccupancyError = createSelector(
     selectOccupancyState,
     (state: OccupancyState) => state.error
@@ -23,6 +21,15 @@ export const selectFetchTime = createSelector(
     selectOccupancyState,
     (state: OccupancyState) => state.fetch_time
 );
+
+
+export const selectTotalCurrentOccupancy = createSelector(
+    selectOccupancyData,
+    (sections: SectionData[]): number | undefined => {
+      const section1 = sections.find(s => s.section_id === 1);
+      return section1 ? section1.current_occupancy_percentage : undefined;
+    }
+  );
 
 export const selectOccupancyDataBySectionId = (sectionId: number, day: number = new Date().getDay()) => createSelector(
     selectOccupancyData,
@@ -44,3 +51,4 @@ export const selectCurrentOccupancyPercentageBySectionId = (sectionId: number) =
         return section ? section.current_occupancy_percentage : undefined;
     }
 );
+

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
-import { selectFetchTime } from 'src/app/store/occupancy.selectors';
+import { selectFetchTime, selectTotalCurrentOccupancy  } from 'src/app/store/occupancy.selectors';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,9 @@ import { selectFetchTime } from 'src/app/store/occupancy.selectors';
 export class HomeComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   fetchTime$!: Observable<string>;
+  totalCurrentOccupancy$!: Observable<number | undefined>;
   occupancyData: any;
+
 
   constructor(private store: Store<any>) { }
 
@@ -25,6 +27,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.unsubscribe$)
     );
+
+    this.totalCurrentOccupancy$ = this.store.pipe(
+      select(selectTotalCurrentOccupancy),
+      takeUntil(this.unsubscribe$)
+    );
+
+    this.totalCurrentOccupancy$.subscribe((percentage: number | undefined) => {
+      this.occupancyData = percentage;
+    });
   }
 
   ngOnDestroy() {
