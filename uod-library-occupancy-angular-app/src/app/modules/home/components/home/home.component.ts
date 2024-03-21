@@ -12,7 +12,6 @@ import { selectFetchTime, selectTotalCurrentOccupancy  } from 'src/app/store/occ
 export class HomeComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   fetchTime$!: Observable<string>;
-  totalCurrentOccupancy$!: Observable<number | undefined>;
   occupancyData: any;
 
 
@@ -28,14 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe$)
     );
 
-    this.totalCurrentOccupancy$ = this.store.pipe(
-      select(selectTotalCurrentOccupancy),
-      takeUntil(this.unsubscribe$)
-    );
-
-    this.totalCurrentOccupancy$.subscribe((percentage: number | undefined) => {
-      this.occupancyData = percentage;
-    });
   }
 
   ngOnDestroy() {

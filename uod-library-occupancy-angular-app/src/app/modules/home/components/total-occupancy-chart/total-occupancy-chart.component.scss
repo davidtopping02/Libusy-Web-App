@@ -16,3 +16,21 @@
     line-height: 20px;
     border-radius: 10px;
 }
+
+
+h2 {
+    font-size: 30px; 
+    color: var(--color-font-dark);
+}
+
+@media only screen and (max-width: 768px) {
+    h2 {
+        font-size: 25px; 
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    h2 {
+        font-size: 20px; 
+    }
+}

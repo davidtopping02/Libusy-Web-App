@@ -1,3 +1,8 @@
+<!-- <h2>Total Occupancy: <b>{{ totalCurrentOccupancy$ | async }}% </b></h2> -->
+
+<h2 class="mt-4">Total Occupancy: <b> {{widthPercentage}} </b></h2>
+
+
 <div class="occupancy-indicator-background">
     <div [ngStyle]="{ 'background-color': backgroundColor, 'width': widthPercentage }"
         class="occupancy-indicator-foreground">
