@@ -38,13 +38,13 @@ export class SectionGraphComponent implements OnInit {
       const hourFormatted = `${hour.toString().padStart(2, '0')}:00`;
       const isCurrent = isCurrentDay && currentHour === hour;
 
-      let value = this.getDefaultOccupancyValue(hour, todayOccupancy);
+      let value = this.getOccupancyValue(hour, todayOccupancy);
       return { time: hourFormatted, value, current: isCurrent } as HourTemplate;
     });
   }
 
-  private getDefaultOccupancyValue(hour: number, todayOccupancy: HourData[]): number {
-    let value = 10; // Default value or a fallback
+  private getOccupancyValue(hour: number, todayOccupancy: HourData[]): number {
+    let value = 5; // Default value or a fallback
     const hourData = todayOccupancy.find((data: HourData) => {
       const dataHour = Number(data.time.split(':')[0]);
       return dataHour === hour;

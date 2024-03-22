@@ -49,10 +49,10 @@ export class TotalOccupancyChartComponent implements OnInit {
     let percentage = this.occupancy;
 
     // Ensure percentage is within the range [10, 90]
-    if (percentage < 10) {
-      percentage = 10;
-    } else if (percentage > 90) {
-      percentage = 90;
+    if (percentage < 5) {
+      percentage = 5;
+    } else if (percentage > 95) {
+      percentage = 95;
     }
 
     this.widthPercentage = percentage.toString().concat('%');
